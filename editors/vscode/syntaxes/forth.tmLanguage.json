@@ -1,0 +1,122 @@
+{
+  "scopeName": "source.forth",
+  "patterns": [
+    {
+      "include": "#line-comment"
+    },
+    {
+      "include": "#paren-comment"
+    },
+    {
+      "include": "#string"
+    },
+    {
+      "include": "#definition"
+    },
+    {
+      "include": "#character"
+    },
+    {
+      "include": "#number"
+    },
+    {
+      "include": "#boolean"
+    },
+    {
+      "include": "#source-directive"
+    },
+    {
+      "include": "#tick"
+    },
+    {
+      "include": "#control"
+    },
+    {
+      "include": "#declaration"
+    },
+    {
+      "include": "#builtins"
+    },
+    {
+      "include": "#compiler"
+    },
+    {
+      "include": "#word"
+    }
+  ],
+  "repository": {
+    "line-comment": {
+      "name": "comment.line.backslash.forth",
+      "begin": "(?<!\\S)\\\\",
+      "end": "$"
+    },
+    "paren-comment": {
+      "name": "comment.block.parentheses.forth",
+      "begin": "(?<!\\S)\\(",
+      "end": "\\)"
+    },
+    "string": {
+      "name": "string.quoted.double.forth",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.forth",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "definition": {
+      "name": "meta.definition.forth",
+      "match": "(?<!\\S)(:)(\\s+)(?!\\$[^\\s](?=\\s|$)|[-+]?(?:0[xX][0-9A-Fa-f]+|0[bB][01]+|[0-9]+)(?=\\s|$)|[()\\\\])([^\\s\"]+)",
+      "captures": {
+        "1": {
+          "name": "keyword.operator.definition.forth"
+        },
+        "3": {
+          "name": "entity.name.function.forth"
+        }
+      }
+    },
+    "character": {
+      "name": "constant.character.forth",
+      "match": "(?<!\\S)\\$[^\\s](?!\\S)"
+    },
+    "number": {
+      "name": "constant.numeric.forth",
+      "match": "(?<!\\S)[-+]?(?:0[xX][0-9A-Fa-f]+|0[bB][01]+|[0-9]+)(?!\\S)"
+    },
+    "boolean": {
+      "name": "constant.language.boolean.forth",
+      "match": "(?<!\\S)(?:TRUE|FALSE)(?!\\S)"
+    },
+    "source-directive": {
+      "name": "keyword.control.directive.forth",
+      "match": "(?<!\\S)/EOF(?!\\S)"
+    },
+    "tick": {
+      "name": "keyword.operator.tick.forth",
+      "match": "(?<!\\S)(?:\\[']|')(?!\\S)"
+    },
+    "control": {
+      "name": "keyword.control.forth",
+      "match": "(?<!\\S)(?:if|else|then|begin|again|until|while|repeat|do|\\?do|loop|\\+loop|case|of|endof|endcase|exit|leave|unloop|\\[|\\]|\\{|\\})(?!\\S)"
+    },
+    "declaration": {
+      "name": "storage.type.forth",
+      "match": "(?<!\\S)(?:constant:|variable:|init-variable:|exception:|defer:|create:|task:|buffer:|array:|byte-array:|field:|struct|marker:)(?!\\S)"
+    },
+    "builtins": {
+      "name": "support.function.forth",
+      "match": "(?<!\\S)(?:dup|2dup|3dup|drop|2drop|3drop|4drop|swap|2swap|over|over2|nip|tuck|rot|mrot|\\?dup|pick|roll|\\+|-|\\*|\\/|%|\\/mod|mod|and|or|xor|invert|lshift|rshift|=|<>|<|>|<=|>=|0=|0<>|0<|0>|1\\+|1-|2\\+|2-|abs|max|min|cells|cell|@|!|c@|c!|h@|h!|,|c,|h,|allot|here|dp|state|find|word|execute|catch|throw|emit|type|type-counted|cr|space|key|ms|ms@|us@|pause|\\.ipv4|compile-time|immediate\\?|link>xt|lastword|reveal|hide|createheader|entercol|literal|postpone:|print:|println:|load:|upload:|assert|assert=|assert<>|assert<|assert>|assert<=|assert>=)(?!\\S)"
+    },
+    "compiler": {
+      "name": "keyword.other.forth",
+      "match": "(?<!\\S)(?:immediate|override|does>|interpret\\?|compile-only)(?!\\S)"
+    },
+    "word": {
+      "name": "variable.other.forth",
+      "match": "(?<!\\S)\\S+"
+    }
+  }
+}
